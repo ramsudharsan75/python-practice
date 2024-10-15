@@ -9,7 +9,9 @@ import aiohttp
 async def get_call(_):
     """Make an asynchronous HTTP request."""
     async with aiohttp.ClientSession() as session:
-        async with session.get("http://localhost:8000", timeout=aiohttp.ClientTimeout(1)) as response:
+        async with session.get(
+            "http://localhost:8000", timeout=aiohttp.ClientTimeout(1000)
+        ) as response:
             return await response.text()
 
 
