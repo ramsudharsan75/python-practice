@@ -4,19 +4,21 @@ from heapq import heappop, heappush
 from math import inf
 
 
-def find_minimum_spanning_tree(adj_mat) -> list[int]:
+def find_minimum_spanning_tree(adj_mat):
     """Find the minimum spanning tree using Prim's algorithm."""
     visited = set()
     n = len(adj_mat)
     distance = [inf] * n
-    parent = [i for i in range(n)]
     heap = [(0, 0, 0)]
+    mst = []
 
-    while heap:
+    while len(visited) < n:
         dist, node, dad = heappop(heap)
         visited.add(node)
         distance[node] = dist
-        parent[node] = dad
+
+        if dad != node:
+            mst.append((dad, node))
 
         for nei, wt in adj_mat[node]:
             if nei in visited:
@@ -24,7 +26,7 @@ def find_minimum_spanning_tree(adj_mat) -> list[int]:
 
             heappush(heap, (wt, nei, node))
 
-    return parent
+    return mst
 
 
 adj_mat = {
