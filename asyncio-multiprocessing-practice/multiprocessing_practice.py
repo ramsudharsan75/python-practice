@@ -12,14 +12,14 @@ def main():
     start = datetime.now()
 
     with Pool(processes=os.cpu_count()) as pool:
-        pool.map(get_call, range(10000))
+        pool.map(get_call, range(10))
 
     end = datetime.now()
     print(f"Time taken using multiprocessing: {(end - start).total_seconds()} seconds")
 
     start = datetime.now()
 
-    for _ in range(10000):
+    for _ in range(10):
         get_call(None)
 
     end = datetime.now()
